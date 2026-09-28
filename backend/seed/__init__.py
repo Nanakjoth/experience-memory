@@ -1,0 +1,1 @@
+"""Synthetic NovaTech demo data."""

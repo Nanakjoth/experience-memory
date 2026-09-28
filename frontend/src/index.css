@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    font-family:
+      ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Inter, Arial,
+      sans-serif;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgb(2 6 23);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgb(51 65 85);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(71 85 105);
+  }
+}
+
+@layer components {
+  .panel {
+    @apply rounded-xl border border-slate-800 bg-slate-900/60 backdrop-blur;
+  }
+  .panel-tight {
+    @apply rounded-lg border border-slate-800 bg-slate-900/40;
+  }
+  .label-xs {
+    @apply text-[11px] font-semibold uppercase tracking-wider text-slate-500;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-3.5 py-2
+      text-sm font-semibold transition-colors disabled:cursor-not-allowed
+      disabled:opacity-40;
+  }
+  .btn-primary {
+    @apply btn bg-cyan-500 text-slate-950 hover:bg-cyan-400;
+  }
+  .btn-ghost {
+    @apply btn border border-slate-700 bg-slate-800/60 text-slate-200 hover:bg-slate-700/60;
+  }
+  .btn-subtle {
+    @apply btn text-slate-400 hover:text-slate-100;
+  }
+  .input {
+    @apply w-full rounded-lg border border-slate-700 bg-slate-950/80 px-3 py-2
+      text-sm text-slate-100 placeholder:text-slate-600
+      focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full border px-2 py-0.5
+      text-[11px] font-semibold;
+  }
+}

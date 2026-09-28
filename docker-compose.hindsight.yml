@@ -1,0 +1,40 @@
+# Hindsight memory bank for MemoryOS.
+#
+# MemoryOS runs fully without this: when no Hindsight server is reachable it
+# falls back to the clearly-labelled HINDSIGHT (SIMULATED) engine with the same
+# retain / recall / reflect contract.
+#
+# To use a live engine instead:
+#   1. docker compose -f docker-compose.hindsight.yml up -d
+#   2. Confirm the bank is up and its id matches HINDSIGHT_BANK_ID below
+#   3. Restart the backend
+#   4. GET /api/engine  ->  "mode": "live", "simulated": false
+#
+# Every person, system, incident and measurement in this project is synthetic.
+
+services:
+  hindsight:
+    image: ghcr.io/hindsight-ai/hindsight:latest
+    container_name: memoryos-hindsight
+    restart: unless-stopped
+    ports:
+      - "8888:8888"
+    environment:
+      # Bank id must match Settings.hindsight_bank_id in backend/config.py
+      HINDSIGHT_BANK_ID: memoryos-novatech
+      # Set HINDSIGHT_API_KEY on the service and export the same value as
+      # HINDSIGHT_API_KEY for the backend process when the instance requires auth.
+      HINDSIGHT_API_KEY: ${HINDSIGHT_API_KEY:-}
+      HINDSIGHT_HOST: 0.0.0.0
+      HINDSIGHT_PORT: "8888"
+    volumes:
+      - hindsight_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8888/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 20s
+
+volumes:
+  hindsight_data:
