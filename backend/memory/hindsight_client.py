@@ -448,7 +448,7 @@ class HindsightEngine(MemoryEngine):
             return EngineHealth(
                 available=True,
                 mode=self.mode,
-                label="HINDSIGHT (live)",
+                label="HINDSIGHT (LIVE)",
                 bank_id=self.bank_id,
                 detail=f"Connected to {self._settings.hindsight_base_url}",
                 version=self._version,

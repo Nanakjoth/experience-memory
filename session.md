@@ -351,6 +351,16 @@ demo, privacy, audit, error paths, verification), and this file.
 
 ## Open items
 
+**Known deviation from the build instructions (deliberate, owner decision)**
+
+- **Bank id and current-scope lines removed from the sidebar engine card.** The
+  live/simulated indicator itself is kept, so section 3 is satisfied: the UI
+  shows `HINDSIGHT (LIVE)` with an emerald dot when connected and
+  `HINDSIGHT (SIMULATED)` with an amber dot when not. The removed lines were
+  `NovaTech - Bank memoryos-novatech` and `Current: <scope>`. The data is still
+  available from `GET /api/engine` (`status.bank_id`) and `/api/actors`
+  (`current_environment`) if it is ever needed in the UI.
+
 **Blocked**
 
 - **Live Hindsight** — no server on `http://localhost:8888`; Docker daemon is not
