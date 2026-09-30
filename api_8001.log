@@ -1,6 +1,0 @@
-INFO:     Started server process [22116]
-INFO:     Waiting for application startup.
-INFO memoryos: MemoryOS starting. Memory engine: HINDSIGHT (SIMULATED) (simulated)
-WARNING memoryos: Hindsight is unreachable at http://localhost:8888. Running the SIMULATED engine. See README -> Hindsight setup.
-INFO:     Application startup complete.
-INFO:     Uvicorn running on http://127.0.0.1:8001 (Press CTRL+C to quit)

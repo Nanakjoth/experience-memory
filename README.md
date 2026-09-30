@@ -25,8 +25,13 @@ experienced it before — and can we prove why it knows it?
 | Document | Read it when you want to know |
 |---|---|
 | [`README.md`](README.md) | How to run it, what each screen does, how to verify it |
-| [`arch.md`](arch.md) | How the code is structured and why it is structured that way |
-| [`flow.md`](flow.md) | What actually happens at runtime, request by request and step by step |
+| [`docs/RUNNING.md`](docs/RUNNING.md) | Every command: quick start, config, Docker, production, troubleshooting |
+| [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Structure and the reasoning behind it, with diagrams |
+| [`docs/FLOWCHART.md`](docs/FLOWCHART.md) | Step-by-step runtime behaviour, traced from real runs |
+| [`docs/PROMPT_CONFIGS.md`](docs/PROMPT_CONFIGS.md) | Every prompt and setting, and what each one actually does |
+| [`docs/SUBMISSION.md`](docs/SUBMISSION.md) | Submission checklist evidence, and the gaps stated plainly |
+| [`arch.md`](arch.md) | The code is structured the way it is |
+| [`flow.md`](flow.md) | What happens at runtime, request by request |
 | [`session.md`](session.md) | What was built, in what order, and what is still open |
 
 ---
@@ -341,8 +346,16 @@ S:\microsoft_prj
 - The memory engine runs **simulated** unless a Hindsight server is reachable.
   The contract is identical, but the results are computed from actually stored
   memories rather than returned by a live Hindsight instance.
-- No LLM is configured. `LLM_PROVIDER=none` means answers are assembled
-  deterministically from recalled evidence and bank directives.
+- **No LLM is configured, and none is called.** `LLM_PROVIDER=none` means
+  answers are assembled deterministically from recalled evidence and bank
+  directives — there is no external model in the execution path. See
+  [`docs/PROMPT_CONFIGS.md`](docs/PROMPT_CONFIGS.md) §7.
+- **No Google Cloud or Gemini integration exists.** The project is
+  container-ready (two Dockerfiles, healthchecks, a durable volume) but has no
+  cloud deployment and no Gemini API usage. Stated plainly in
+  [`docs/SUBMISSION.md`](docs/SUBMISSION.md) §4.1.
+- The frontend has **no automated tests**. It is gated on strict TypeScript,
+  ESLint and a production build; functional verification is currently manual.
 - The SQLite store is single-process and not designed for concurrent writers.
 - Authentication is out of scope. The actor selector is a *demonstration* of the
   permission resolver, not an identity system.

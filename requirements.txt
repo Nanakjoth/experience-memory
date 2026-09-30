@@ -1,0 +1,31 @@
+# MemoryOS — backend runtime dependencies
+#
+# Install:  python -m pip install -r requirements.txt
+# Dev deps: python -m pip install -r requirements-dev.txt
+#
+# These are DIRECT dependencies only. Versions are the lower bounds that were
+# verified working on this codebase, with an upper cap on the major version so a
+# breaking release cannot silently break a fresh install.
+
+# --- Web framework ---------------------------------------------------------
+fastapi>=0.115,<1.0
+uvicorn[standard]>=0.30,<1.0
+
+# --- Settings / validation -------------------------------------------------
+pydantic>=2.7,<3.0
+pydantic-settings>=2.2,<3.0
+
+# --- Memory engine ---------------------------------------------------------
+# The real Hindsight memory engine. Optional at runtime: if it is absent or the
+# server is unreachable, MemoryOS falls back to the built-in SIMULATED engine
+# (backend/memory/hindsight_client.py) which implements the same
+# retain/recall/reflect contract.
+hindsight-client>=0.10,<1.0
+
+# --- HTTP client -----------------------------------------------------------
+# Used by the live Hindsight engine for its async calls.
+httpx>=0.27,<1.0
+
+# --- Environment ------------------------------------------------------------
+# Reads backend/.env. Also used transitively by pydantic-settings.
+python-dotenv>=1.0,<2.0

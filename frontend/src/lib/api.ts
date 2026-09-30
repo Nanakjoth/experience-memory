@@ -1,4 +1,17 @@
-const BASE = "";
+/**
+ * Origin the API is called on.
+ *
+ * Empty (the default) means same-origin: requests go to relative `/api/*` paths.
+ * That is correct for `npm run dev`, where the Vite proxy forwards /api to the
+ * backend, and for production when the API is served from the same host behind
+ * a reverse proxy.
+ *
+ * Set `VITE_API_BASE_URL` at build time to call a different origin:
+ *   VITE_API_BASE_URL=https://api.example.com npm run build
+ *
+ * Vite inlines env vars at build time, so changing it requires a rebuild.
+ */
+const BASE = (import.meta.env.VITE_API_BASE_URL ?? "").replace(/\/+$/, "");
 
 export class ApiError extends Error {
   status: number;
